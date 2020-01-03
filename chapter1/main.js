@@ -52,7 +52,7 @@ function statement(invoice, plays) {
       style: 'currency',
       currency: 'USD',
       minumFractionDigits: 2
-    }).format(aNumber);
+    }).format(aNumber / 100);
   }
 
   let totalAmount = 0;
@@ -63,13 +63,13 @@ function statement(invoice, plays) {
     volumeCredits += volumeCreditsFor(perf);
 
     // 注文の内訳を出力
-    result += ` ${playFor(perf).name}: ${usd(amountFor(perf) / 100)} (${
+    result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${
       perf.audience
     }席) \n`;
     totalAmount += amountFor(perf);
   }
 
-  result += `支払額は${usd(totalAmount / 100)}\n`;
+  result += `支払額は${usd(totalAmount)}\n`;
   result += `次回使える特典は${volumeCredits}ポイント\n`;
   return result;
 }
