@@ -46,26 +46,30 @@ function statement(invoice, plays) {
     return result;
   }
 
+  // 価格表示フォーマット関数
+  function format(aNumber) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minumFractionDigits: 2
+    }).format(aNumber);
+  }
+
   let totalAmount = 0;
   let volumeCredits = 0;
   let result = `${invoice.customer} の支払い\n`;
-  const price = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minumFractionDigits: 2
-  });
 
   for (let perf of invoice.performances) {
     volumeCredits += volumeCreditsFor(perf);
 
     // 注文の内訳を出力
-    result += ` ${playFor(perf).name}: ${price.format(
-      amountFor(perf) / 100
-    )} (${perf.audience}席) \n`;
+    result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
+      perf.audience
+    }席) \n`;
     totalAmount += amountFor(perf);
   }
 
-  result += `支払額は${price.format(totalAmount / 100)}\n`;
+  result += `支払額は${format(totalAmount / 100)}\n`;
   result += `次回使える特典は${volumeCredits}ポイント\n`;
   return result;
 }
