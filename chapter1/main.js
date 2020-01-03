@@ -12,6 +12,11 @@ function statement(invoice, plays) {
     minumFractionDigits: 2
   });
 
+  // 公演を取得する関数
+  function playFor(aPerformance) {
+    return plays[aPerformance.playID];
+  }
+
   // 一回のチケット料金を取得する関数
   function amountFor(aPerformance, play) {
     let result = 0;
@@ -38,17 +43,17 @@ function statement(invoice, plays) {
   }
 
   for (let perf of invoice.performances) {
-    const play = plays[perf.playID];
-    let thisAmount = amountFor(perf, play);
+    let thisAmount = amountFor(perf, playFor(perf));
 
     // ボリューム特典のポイントを換算
     volumeCredits += Math.max(perf.audience - 30, 0);
 
     // 喜劇のときは10人につき、さらにポイントを加算
-    if ('comedy' === play.type) volumeCredits += Math.floor(perf.audience / 5);
+    if ('comedy' === playFor(perf).type)
+      volumeCredits += Math.floor(perf.audience / 5);
 
     // 注文の内訳を出力
-    result += ` ${play.name}: ${price.format(thisAmount / 100)} (${
+    result += ` ${playFor(perf).name}: ${price.format(thisAmount / 100)} (${
       perf.audience
     }席) \n`;
     totalAmount += thisAmount;
