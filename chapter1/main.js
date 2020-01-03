@@ -12,6 +12,7 @@ function statement(invoice, plays) {
     minumFractionDigits: 2
   });
 
+  // 一回のチケット料金を取得する関数
   function amountFor(aPerformance, play) {
     let result = 0;
 
