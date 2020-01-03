@@ -2,16 +2,6 @@ const plays = require('./plays.json');
 const invoices = require('./invoices.json');
 
 function statement(invoice, plays) {
-  let totalAmount = 0;
-  let volumeCredits = 0;
-  let result = `${invoice.customer} の支払い\n`;
-
-  const price = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minumFractionDigits: 2
-  });
-
   // 公演を取得する関数
   function playFor(aPerformance) {
     return plays[aPerformance.playID];
@@ -42,8 +32,9 @@ function statement(invoice, plays) {
     return result;
   }
 
-  for (let perf of invoice.performances) {
-    let thisAmount = amountFor(perf);
+  // ボリューム特典ポイント計算
+  function volumeCreditsFor(perf) {
+    let volumeCredits = 0;
 
     // ボリューム特典のポイントを換算
     volumeCredits += Math.max(perf.audience - 30, 0);
@@ -52,11 +43,26 @@ function statement(invoice, plays) {
     if ('comedy' === playFor(perf).type)
       volumeCredits += Math.floor(perf.audience / 5);
 
+    return volumeCredits;
+  }
+
+  let totalAmount = 0;
+  let volumeCredits = 0;
+  let result = `${invoice.customer} の支払い\n`;
+  const price = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minumFractionDigits: 2
+  });
+
+  for (let perf of invoice.performances) {
+    volumeCredits += volumeCreditsFor(perf);
+
     // 注文の内訳を出力
-    result += ` ${playFor(perf).name}: ${price.format(thisAmount / 100)} (${
-      perf.audience
-    }席) \n`;
-    totalAmount += thisAmount;
+    result += ` ${playFor(perf).name}: ${price.format(
+      amountFor(perf) / 100
+    )} (${perf.audience}席) \n`;
+    totalAmount += amountFor(perf);
   }
 
   result += `支払額は${price.format(totalAmount / 100)}\n`;
