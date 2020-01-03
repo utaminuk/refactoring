@@ -47,7 +47,7 @@ function statement(invoice, plays) {
   }
 
   // 価格表示フォーマット関数
-  function format(aNumber) {
+  function usd(aNumber) {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -63,13 +63,13 @@ function statement(invoice, plays) {
     volumeCredits += volumeCreditsFor(perf);
 
     // 注文の内訳を出力
-    result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
+    result += ` ${playFor(perf).name}: ${usd(amountFor(perf) / 100)} (${
       perf.audience
     }席) \n`;
     totalAmount += amountFor(perf);
   }
 
-  result += `支払額は${format(totalAmount / 100)}\n`;
+  result += `支払額は${usd(totalAmount / 100)}\n`;
   result += `次回使える特典は${volumeCredits}ポイント\n`;
   return result;
 }
