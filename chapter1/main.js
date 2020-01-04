@@ -74,10 +74,8 @@ function statement(invoice, plays) {
     totalAmount += amountFor(perf);
   }
 
-  let volumeCredits = totalVolumeCredits();
-
   result += `支払額は${usd(totalAmount)}\n`;
-  result += `次回使える特典は${volumeCredits}ポイント\n`;
+  result += `次回使える特典は${totalVolumeCredits()}ポイント\n`;
   return result;
 }
 
