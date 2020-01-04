@@ -2,9 +2,24 @@ const plays = require('./plays.json');
 const invoices = require('./invoices.json');
 
 function statement(invoice, plays) {
-  return renderPlainText(invoice, plays);
+  const statementData = {};
+  statementData.customer = invoice.customer;
+  return renderPlainText(statementData, invoice, plays);
 }
-function renderPlainText(invoice, plays) {
+function renderPlainText(data, invoice, plays) {
+  let result = `${data.customer} の支払い\n`;
+
+  for (let perf of invoice.performances) {
+    // 注文の内訳を加算
+    result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${
+      perf.audience
+    }席) \n`;
+  }
+
+  result += `支払額は${usd(totalAmount())}\n`;
+  result += `次回使える特典は${totalVolumeCredits()}ポイント\n`;
+  return result;
+
   // 公演を取得する関数
   function playFor(aPerformance) {
     return plays[aPerformance.playID];
@@ -75,19 +90,6 @@ function renderPlainText(invoice, plays) {
     }
     return result;
   }
-
-  let result = `${invoice.customer} の支払い\n`;
-
-  for (let perf of invoice.performances) {
-    // 注文の内訳を加算
-    result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${
-      perf.audience
-    }席) \n`;
-  }
-
-  result += `支払額は${usd(totalAmount())}\n`;
-  result += `次回使える特典は${totalVolumeCredits()}ポイント\n`;
-  return result;
 }
 
 // テストコード
