@@ -11,27 +11,13 @@ function statement(invoice, plays) {
     // deep copyにする場合はObject.createなどに変更する必要がある
     const result = { ...aPerformance };
     result.play = playFor(result);
+    result.amount = amountFor(result);
     return result;
   }
   // 公演を取得する関数
   function playFor(aPerformance) {
     return plays[aPerformance.playID];
   }
-}
-function renderPlainText(data, plays) {
-  let result = `${data.customer} の支払い\n`;
-
-  for (let perf of data.performances) {
-    // 注文の内訳を加算
-    result += ` ${perf.play.name}: ${usd(amountFor(perf))} (${
-      perf.audience
-    }席) \n`;
-  }
-
-  result += `支払額は${usd(totalAmount())}\n`;
-  result += `次回使える特典は${totalVolumeCredits()}ポイント\n`;
-  return result;
-
   // 一回のチケット料金を取得する関数
   function amountFor(aPerformance) {
     let result = 0;
@@ -56,6 +42,18 @@ function renderPlainText(data, plays) {
 
     return result;
   }
+}
+function renderPlainText(data, plays) {
+  let result = `${data.customer} の支払い\n`;
+
+  for (let perf of data.performances) {
+    // 注文の内訳を加算
+    result += ` ${perf.play.name}: ${usd(perf.amount)} (${perf.audience}席) \n`;
+  }
+
+  result += `支払額は${usd(totalAmount())}\n`;
+  result += `次回使える特典は${totalVolumeCredits()}ポイント\n`;
+  return result;
 
   // ボリューム特典ポイント計算
   function volumeCreditsFor(aPerformance) {
@@ -93,7 +91,7 @@ function renderPlainText(data, plays) {
   function totalAmount() {
     let result = 0;
     for (let perf of data.performances) {
-      result += amountFor(perf);
+      result += perf.amount;
     }
     return result;
   }
