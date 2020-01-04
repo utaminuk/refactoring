@@ -12,6 +12,7 @@ function statement(invoice, plays) {
     const result = { ...aPerformance };
     result.play = playFor(result);
     result.amount = amountFor(result);
+    result.volumeCredits = volumeCreditsFor(result);
     return result;
   }
   // 公演を取得する関数
@@ -42,18 +43,6 @@ function statement(invoice, plays) {
 
     return result;
   }
-}
-function renderPlainText(data, plays) {
-  let result = `${data.customer} の支払い\n`;
-
-  for (let perf of data.performances) {
-    // 注文の内訳を加算
-    result += ` ${perf.play.name}: ${usd(perf.amount)} (${perf.audience}席) \n`;
-  }
-
-  result += `支払額は${usd(totalAmount())}\n`;
-  result += `次回使える特典は${totalVolumeCredits()}ポイント\n`;
-  return result;
 
   // ボリューム特典ポイント計算
   function volumeCreditsFor(aPerformance) {
@@ -68,6 +57,18 @@ function renderPlainText(data, plays) {
 
     return result;
   }
+}
+function renderPlainText(data, plays) {
+  let result = `${data.customer} の支払い\n`;
+
+  for (let perf of data.performances) {
+    // 注文の内訳を加算
+    result += ` ${perf.play.name}: ${usd(perf.amount)} (${perf.audience}席) \n`;
+  }
+
+  result += `支払額は${usd(totalAmount())}\n`;
+  result += `次回使える特典は${totalVolumeCredits()}ポイント\n`;
+  return result;
 
   // 価格表示フォーマット関数
   function usd(aNumber) {
@@ -82,7 +83,7 @@ function renderPlainText(data, plays) {
   function totalVolumeCredits() {
     let result = 0;
     for (let perf of data.performances) {
-      result += volumeCreditsFor(perf);
+      result += perf.volumeCredits;
     }
     return result;
   }
