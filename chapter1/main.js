@@ -2,12 +2,17 @@ const plays = require('./plays.json');
 const invoices = require('./invoices.json');
 
 function statement(invoice, plays) {
+  return renderPlainText(createStatementData(invoice, plays));
+}
+
+function createStatementData(invoice, plays) {
   const statementData = {};
   statementData.customer = invoice.customer;
   statementData.performances = invoice.performances.map(enrichPerformance);
   statementData.totalAmount = totalAmount(statementData);
   statementData.totalVolumeCredits = totalVolumeCredits(statementData);
-  return renderPlainText(statementData, plays);
+
+  return statementData;
 
   function enrichPerformance(aPerformance) {
     // deep copyにする場合はObject.createなどに変更する必要がある
