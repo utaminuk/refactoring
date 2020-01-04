@@ -33,39 +33,43 @@ function statement(invoice, plays) {
   }
 
   // ボリューム特典ポイント計算
-  function volumeCreditsFor(perf) {
-    let volumeCredits = 0;
+  function volumeCreditsFor(aPerformance) {
+    let result = 0;
 
     // ボリューム特典のポイントを換算
-    volumeCredits += Math.max(perf.audience - 30, 0);
+    result += Math.max(aPerformance.audience - 30, 0);
 
     // 喜劇のときは10人につき、さらにポイントを加算
-    if ('comedy' === playFor(perf).type)
-      volumeCredits += Math.floor(perf.audience / 5);
+    if ('comedy' === playFor(aPerformance).type)
+      result += Math.floor(aPerformance.audience / 5);
 
-    return volumeCredits;
+    return result;
+  }
+
+  // 価格表示フォーマット関数
+  function usd(aNumber) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minumFractionDigits: 2
+    }).format(aNumber / 100);
   }
 
   let totalAmount = 0;
   let volumeCredits = 0;
   let result = `${invoice.customer} の支払い\n`;
-  const price = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minumFractionDigits: 2
-  });
 
   for (let perf of invoice.performances) {
     volumeCredits += volumeCreditsFor(perf);
 
     // 注文の内訳を出力
-    result += ` ${playFor(perf).name}: ${price.format(
-      amountFor(perf) / 100
-    )} (${perf.audience}席) \n`;
+    result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${
+      perf.audience
+    }席) \n`;
     totalAmount += amountFor(perf);
   }
 
-  result += `支払額は${price.format(totalAmount / 100)}\n`;
+  result += `支払額は${usd(totalAmount)}\n`;
   result += `次回使える特典は${volumeCredits}ポイント\n`;
   return result;
 }
