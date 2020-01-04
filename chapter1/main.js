@@ -64,7 +64,7 @@ function statement(invoice, plays) {
     return volumeCredits;
   }
 
-  function appleSauce() {
+  function totalAmount() {
     let totalAmount = 0;
     for (let perf of invoice.performances) {
       totalAmount += amountFor(perf);
@@ -81,9 +81,7 @@ function statement(invoice, plays) {
     }席) \n`;
   }
 
-  let totalAmount = appleSauce();
-
-  result += `支払額は${usd(totalAmount)}\n`;
+  result += `支払額は${usd(totalAmount())}\n`;
   result += `次回使える特典は${totalVolumeCredits()}ポイント\n`;
   return result;
 }
