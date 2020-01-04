@@ -5,6 +5,7 @@ function statement(invoice, plays) {
   const statementData = {};
   statementData.customer = invoice.customer;
   statementData.performances = invoice.performances.map(enrichPerformance);
+  statementData.totalAmount = totalAmount(statementData);
   return renderPlainText(statementData, plays);
 
   function enrichPerformance(aPerformance) {
@@ -57,7 +58,17 @@ function statement(invoice, plays) {
 
     return result;
   }
+
+  // 総課金額を計算
+  function totalAmount(data) {
+    let result = 0;
+    for (let perf of data.performances) {
+      result += perf.amount;
+    }
+    return result;
+  }
 }
+
 function renderPlainText(data, plays) {
   let result = `${data.customer} の支払い\n`;
 
@@ -66,7 +77,7 @@ function renderPlainText(data, plays) {
     result += ` ${perf.play.name}: ${usd(perf.amount)} (${perf.audience}席) \n`;
   }
 
-  result += `支払額は${usd(totalAmount())}\n`;
+  result += `支払額は${usd(data.totalAmount)}\n`;
   result += `次回使える特典は${totalVolumeCredits()}ポイント\n`;
   return result;
 
@@ -84,15 +95,6 @@ function renderPlainText(data, plays) {
     let result = 0;
     for (let perf of data.performances) {
       result += perf.volumeCredits;
-    }
-    return result;
-  }
-
-  // 総課金額を計算
-  function totalAmount() {
-    let result = 0;
-    for (let perf of data.performances) {
-      result += perf.amount;
     }
     return result;
   }
