@@ -1,3 +1,9 @@
+class PerformanceCalculator {
+  constructor(aPerformance) {
+    this.performance = aPerformance;
+  }
+}
+
 export default function createStatementData(invoice, plays) {
   const result = {};
   result.customer = invoice.customer;
@@ -8,6 +14,7 @@ export default function createStatementData(invoice, plays) {
   return result;
 
   function enrichPerformance(aPerformance) {
+    const calculater = new PerformanceCalculator(aPerformance);
     // deep copyにする場合はObject.createなどに変更する必要がある
     const result = { ...aPerformance };
     result.play = playFor(result);
