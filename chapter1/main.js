@@ -2,6 +2,9 @@ const plays = require('./plays.json');
 const invoices = require('./invoices.json');
 
 function statement(invoice, plays) {
+  return renderPlainText(invoice, plays);
+}
+function renderPlainText(invoice, plays) {
   // 公演を取得する関数
   function playFor(aPerformance) {
     return plays[aPerformance.playID];
