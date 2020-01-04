@@ -6,6 +6,7 @@ function statement(invoice, plays) {
   statementData.customer = invoice.customer;
   statementData.performances = invoice.performances.map(enrichPerformance);
   statementData.totalAmount = totalAmount(statementData);
+  statementData.totalVolumeCredits = totalVolumeCredits(statementData);
   return renderPlainText(statementData, plays);
 
   function enrichPerformance(aPerformance) {
@@ -67,6 +68,15 @@ function statement(invoice, plays) {
     }
     return result;
   }
+
+  // ボリューム特典の集計
+  function totalVolumeCredits(data) {
+    let result = 0;
+    for (let perf of data.performances) {
+      result += perf.volumeCredits;
+    }
+    return result;
+  }
 }
 
 function renderPlainText(data, plays) {
@@ -78,7 +88,7 @@ function renderPlainText(data, plays) {
   }
 
   result += `支払額は${usd(data.totalAmount)}\n`;
-  result += `次回使える特典は${totalVolumeCredits()}ポイント\n`;
+  result += `次回使える特典は${data.totalVolumeCredits}ポイント\n`;
   return result;
 
   // 価格表示フォーマット関数
@@ -88,15 +98,6 @@ function renderPlainText(data, plays) {
       currency: 'USD',
       minumFractionDigits: 2
     }).format(aNumber / 100);
-  }
-
-  // ボリューム特典の集計
-  function totalVolumeCredits() {
-    let result = 0;
-    for (let perf of data.performances) {
-      result += perf.volumeCredits;
-    }
-    return result;
   }
 }
 
