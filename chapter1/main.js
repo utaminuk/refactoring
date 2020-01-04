@@ -4,12 +4,13 @@ const invoices = require('./invoices.json');
 function statement(invoice, plays) {
   const statementData = {};
   statementData.customer = invoice.customer;
-  return renderPlainText(statementData, invoice, plays);
+  statementData.performances = invoice.performances;
+  return renderPlainText(statementData, plays);
 }
-function renderPlainText(data, invoice, plays) {
+function renderPlainText(data, plays) {
   let result = `${data.customer} の支払い\n`;
 
-  for (let perf of invoice.performances) {
+  for (let perf of data.performances) {
     // 注文の内訳を加算
     result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${
       perf.audience
@@ -76,7 +77,7 @@ function renderPlainText(data, invoice, plays) {
   // ボリューム特典の集計
   function totalVolumeCredits() {
     let result = 0;
-    for (let perf of invoice.performances) {
+    for (let perf of data.performances) {
       result += volumeCreditsFor(perf);
     }
     return result;
@@ -85,7 +86,7 @@ function renderPlainText(data, invoice, plays) {
   // 総課金額を計算
   function totalAmount() {
     let result = 0;
-    for (let perf of invoice.performances) {
+    for (let perf of data.performances) {
       result += amountFor(perf);
     }
     return result;
