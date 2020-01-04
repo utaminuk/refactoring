@@ -56,17 +56,19 @@ function statement(invoice, plays) {
   }
 
   let totalAmount = 0;
-  let volumeCredits = 0;
   let result = `${invoice.customer} の支払い\n`;
 
   for (let perf of invoice.performances) {
-    volumeCredits += volumeCreditsFor(perf);
-
-    // 注文の内訳を出力
+    // 注文の内訳を加算
     result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${
       perf.audience
     }席) \n`;
     totalAmount += amountFor(perf);
+  }
+
+  let volumeCredits = 0;
+  for (let perf of invoice.performances) {
+    volumeCredits += volumeCreditsFor(perf);
   }
 
   result += `支払額は${usd(totalAmount)}\n`;
