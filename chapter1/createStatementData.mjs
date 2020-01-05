@@ -45,8 +45,18 @@ class PerformanceCalculator {
 }
 
 function createPerformanceCalculator(aPerformance, aPlay) {
-  return new PerformanceCalculator(aPerformance, aPlay);
+  switch (aPlay.type) {
+    case 'tragedy':
+      return new TragedyCalculator(aPerformance, aPlay);
+    case 'comedy':
+      return new ComedyCalculator(aPerformance, aPlay);
+    default:
+      throw new Error(`未知の演劇の種類: ${aPlay.type}`);
+  }
 }
+
+class TragedyCalculator extends PerformanceCalculator {}
+class ComedyCalculator extends PerformanceCalculator {}
 
 export default function createStatementData(invoice, plays) {
   const result = {};
