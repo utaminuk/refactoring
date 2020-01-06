@@ -1,4 +1,6 @@
-# refatoring
+# リファクタリング第 2 版の読書メモ
+
+- https://www.ohmsha.co.jp/book/9784274224546/
 
 ### 実行
 
