@@ -115,5 +115,3 @@ export function sampleProvinceData() {
     price: 20
   };
 }
-
-console.log(`index`);
