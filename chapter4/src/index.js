@@ -1,4 +1,4 @@
-class Province {
+export class Province {
   constructor(doc) {
     this._name = doc.name; // 地域名
     this._producers = []; // 生産者リスト
@@ -103,7 +103,7 @@ class Producer {
 }
 
 // テスト用 地域データ
-function sampleProvinceData() {
+export function sampleProvinceData() {
   return {
     name: 'Asia',
     producers: [
