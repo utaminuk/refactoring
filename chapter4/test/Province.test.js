@@ -21,6 +21,11 @@ describe('Province', () => {
     expect(asia.shortfall).toBe(-25);
     expect(asia.profit).toBe(0);
   });
+  test('demandが-1の場合', () => {
+    asia.demand = -1;
+    expect(asia.shortfall).toBe(-26);
+    expect(asia.profit).toBe(-10);
+  });
 });
 
 describe('Producerが設定されていないパターン', () => {
