@@ -48,7 +48,7 @@ export class Province {
 
   // 利益計算
   get profit() {
-    return this.demandValue - this.demandCost;
+    return this.demandCost - this.demandValue;
   }
 
   // 需要計算
@@ -115,5 +115,3 @@ export function sampleProvinceData() {
     price: 20
   };
 }
-
-console.log(`index`);
