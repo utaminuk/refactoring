@@ -10,16 +10,14 @@
 node --experimental-modules main.mjs
 ```
 
-### 第 4 章
+### 第 4 章以降
 
 ```bash
-cd chapter4
-
 # インストール
 npm i
 
-# 実行
-npm run start
+# 第4章実行
+npm run start:chapter4
 
 # テスト
 npm run test
