@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:chapter4": "babel chapter4/src -d chapter4/dist && node chapter4/dist/index.js",
+    "start:chapter6": "babel chapter6/src -d chapter6/dist && node chapter6/dist/index.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },
