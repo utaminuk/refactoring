@@ -6,9 +6,14 @@ export function printOwing(invoice) {
 
   // 途中処理
   printBanner();
-  let outstanding = calculateOutstaing();
 
-  // 明細の印字(print details)
-  console.log(`name: ${invoice.customer}`);
-  console.log(`amount: ${outstanding}`);
+  // 最終結果
+  let outstanding = calculateOutstaing();
+  printDetails(outstanding);
+
+  function printDetails(outstanding) {
+    // 明細の印字(print details)
+    console.log(`name: ${invoice.customer}`);
+    console.log(`amount: ${outstanding}`);
+  }
 }
