@@ -32,14 +32,17 @@ export function printOwing2(invoice) {
 
   printBanner();
 
-  // 未払金の計算
+  let outstanding = calculateOutstaing(invoice);
+  recordDueDate(invoice);
+  printDetail(invoice, outstanding);
+
+  return outstanding;
+}
+// 未払金の計算
+function calculateOutstaing(invoice) {
   let outstanding = 0;
   for (const o of invoice.others) {
     outstanding += o.amount;
   }
-
-  recordDueDate(invoice);
-  printDetail(invoice, outstanding);
-
   return outstanding;
 }
