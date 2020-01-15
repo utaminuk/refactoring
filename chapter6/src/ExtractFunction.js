@@ -19,7 +19,6 @@ export function printOwing(invoice) {
 }
 
 export function printOwing2(invoice) {
-  let outstanding = 0;
   const printBanner = () => {
     console.log(`printBanner`);
   };
@@ -34,6 +33,7 @@ export function printOwing2(invoice) {
   printBanner();
 
   // 未払金の計算
+  let outstanding = 0;
   for (const o of invoice.others) {
     outstanding += o.amount;
   }
