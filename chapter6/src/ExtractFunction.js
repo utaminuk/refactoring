@@ -40,9 +40,9 @@ export function printOwing2(invoice) {
 }
 // 未払金の計算
 function calculateOutstaing(invoice) {
-  let outstanding = 0;
+  let result = 0;
   for (const o of invoice.others) {
-    outstanding += o.amount;
+    result += o.amount;
   }
-  return outstanding;
+  return result;
 }
