@@ -32,7 +32,7 @@ export function printOwing2(invoice) {
 
   printBanner();
 
-  let outstanding = calculateOutstaing(invoice);
+  const outstanding = calculateOutstaing(invoice);
   recordDueDate(invoice);
   printDetail(invoice, outstanding);
 
