@@ -17,3 +17,29 @@ export function printOwing(invoice) {
     console.log(`amount: ${outstanding}`);
   }
 }
+
+export function printOwing2(invoice) {
+  let outstanding = 0;
+  const printBanner = () => {
+    console.log(`printBanner`);
+  };
+  const recordDueDate = invoice => {
+    return invoice;
+  };
+  const printDetail = (invoice, outstanding) => {
+    console.log(invoice);
+    console.log(outstanding);
+  };
+
+  printBanner();
+
+  // 未払金の計算
+  for (const o of invoice.others) {
+    outstanding += o.amount;
+  }
+
+  recordDueDate(invoice);
+  printDetail(invoice, outstanding);
+
+  return outstanding;
+}
