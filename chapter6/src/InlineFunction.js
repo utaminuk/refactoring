@@ -1,4 +1,4 @@
-function getRating(driver) {
+export function getRating(driver) {
   return moreThanFiveDeliveries(driver) ? 2 : 1;
 }
 
