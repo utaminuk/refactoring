@@ -20,14 +20,14 @@ export function printOwing(invoice) {
 
 export function printOwing2(invoice) {
   const printBanner = () => {
-    console.log(`printBanner`);
+    // console.log(`printBanner`);
   };
   const recordDueDate = invoice => {
     return invoice;
   };
   const printDetail = (invoice, outstanding) => {
-    console.log(invoice);
-    console.log(outstanding);
+    // console.log(invoice);
+    // console.log(outstanding);
   };
 
   printBanner();
