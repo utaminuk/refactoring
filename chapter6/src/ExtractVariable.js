@@ -2,7 +2,8 @@ export function ExtractVariable(order) {
   const basePrice = order.quantity * order.itemPrice;
   const quantityDiscouunt =
     Math.max(0, order.quantity - 500) * order.itemPrice * 0.05;
-  return basePrice - quantityDiscouunt + Math.min(basePrice * 0.1, 100);
+  const shipping = Math.min(basePrice * 0.1, 100);
+  return basePrice - quantityDiscouunt + shipping;
 }
 
 // export function ExtractVariable(order) {
