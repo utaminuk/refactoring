@@ -8,6 +8,6 @@ describe('ExtractVariable', () => {
       quantity: 100,
       itemPrice: 2000
     };
-    expect(ExtractVariable(order)).toBe(10100);
+    expect(ExtractVariable(order)).toBe(200100);
   });
 });
