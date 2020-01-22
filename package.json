@@ -21,5 +21,10 @@
     "@babel/preset-env": "^7.7.7",
     "@types/jest": "^24.0.25",
     "jest": "^24.9.0"
+  },
+  "jest": {
+    "globals": {
+      "TZ": "utc"
+    }
   }
 }
