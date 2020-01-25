@@ -6,7 +6,7 @@ describe('EncapsulateVariable: 変数のカプセル化', () => {
   test('デフォルトオーナーの配列をチェックする', () => {
     const expected = { firstName: 'Martin', lastName: 'Fowler' }
       ;
-    expect(defaultOwner).toStrictEqual(expected);
+    expect(defaultOwner()).toStrictEqual(expected);
   });
 
 
