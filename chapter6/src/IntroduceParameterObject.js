@@ -1,9 +1,9 @@
 export function amountInvoiced(startDate, endDate) {
-  return (startDate - endDate) * 10;
+  return (endDate - startDate) * 10;
 }
 export function amountReceived(startDate, endDate) {
-  return (startDate - endDate) * 20;
+  return (endDate - startDate) * 20;
 }
 export function amountOverdue(startDate, endDate) {
-  return (startDate - endDate) * 30;
+  return (endDate - startDate) * 30;
 }
