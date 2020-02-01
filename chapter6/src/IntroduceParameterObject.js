@@ -1,5 +1,5 @@
-export function amountInvoiced(startDate, endDate) {
-  return (endDate - startDate) * 10;
+export function amountInvoiced(aDateRange) {
+  return (aDateRange.endDate - aDateRange.startDate) * 10;
 }
 export function amountReceived(startDate, endDate) {
   return (endDate - startDate) * 20;
