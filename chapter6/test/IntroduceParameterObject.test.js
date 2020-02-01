@@ -21,7 +21,8 @@ describe('IntroduceParameterObject: パラメータオブジェクトの導入',
   test('amountOverdue: 開始時間と終了時間を設定して延滞金を返す', () => {
     const startDate = new Date(2019, 10, 11, 21, 23, 1);
     const endDate = new Date(2019, 10, 11, 21, 23, 21);
-    expect(amountOverdue(startDate, endDate)).toBe(20 * 1000 * 30);
+    const amountDateRange = { startDate, endDate };
+    expect(amountOverdue(amountDateRange)).toBe(20 * 1000 * 30);
   });
 
 
