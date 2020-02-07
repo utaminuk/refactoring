@@ -17,7 +17,7 @@ describe('CombineFunctionsIntoClass.calculateBaseCharge: 関数群のクラス�
   test('baseRate: 正常系 2019, 10を入力', () => {
     let expected = { customer: "ivan", quantity: 10, month: 6, year: 2017 };
     let aReading = new Reading(expected)
-    expect(aReading.calculateBaseCharge()).toBe(10.6);
+    expect(aReading.calculateBaseCharge).toBe(10.6);
   });
 
 });
