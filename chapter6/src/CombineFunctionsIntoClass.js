@@ -21,14 +21,14 @@ export class Reading {
     return Math.round(num * 100) / 100;
   }
 
-  get calculateBaseCharge() {
+  get baseCharge() {
     return this.round(this.baseRate(this.month, this.year) * this.quantity);
   }
 }
 
 
 const aReading = new Reading(rawReading);
-const baseCharge = aReading.calculateBaseCharge;
+const baseCharge = aReading.baseCharge;
 
 
 
