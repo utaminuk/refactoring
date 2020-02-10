@@ -25,6 +25,10 @@ export class Reading {
     return year % 2000;
   }
 
+  get taxableCharge() {
+    return Math.max(0, this.baseCharge - this.taxThreshold(this.year));
+  }
+
   get baseCharge() {
     return this.round(this.baseRate(this.month, this.year) * this.quantity);
   }
@@ -33,7 +37,7 @@ export class Reading {
 
 const aReading = new Reading(rawReading);
 const baseCharge = aReading.baseCharge;
-const textableCharge = Math.max(0, aReading.baseCharge - aReading.taxThreshold(aReading.year))
+const textableCharge = Math.max(0, aReading.baseCharge - aReading.taxableCharge)
 
 
 
