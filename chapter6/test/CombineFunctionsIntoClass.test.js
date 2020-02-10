@@ -21,3 +21,14 @@ describe('CombineFunctionsIntoClass.calculateBaseCharge: 関数群のクラス�
   });
 
 });
+
+describe('CombineFunctionsIntoClass.texableCharge: 関数群のクラスへの集約 - 基本課税額', () => {
+  beforeEach(() => { });
+  afterEach(() => { });
+  test('baseRate: 正常系 2019, 10を入力', () => {
+    let expected = { customer: "ivan", quantity: 10, month: 6, year: 2017 };
+    let aReading = new Reading(expected)
+    expect(aReading.baseCharge).toBe(10.6);
+  });
+
+});
