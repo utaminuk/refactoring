@@ -4,11 +4,14 @@ function baseRate(month, year) {
   return 1 + this.round((((year - month) / 2000) - 1) * 10);
 }
 
+function calculateBaseCharge(aReading) {
+  return baseRate(aReading.month, aReading.year) * aReading.quantity;
+}
+
 
 const aReading = aquireReading();
 // 基本料金
-const baseCharge = baseRate(aReading.month, aReading.year) * aReading.quantity;
+const baseCharge = calculateBaseCharge(aReading);
 
 // 課税対象額
-const base = (baseRate(aReading.month, aReading.year) * aReading.quantity);
-const taxableCharge = Math.max(0, base - taxThreshhold(aReading.year))
+const taxableCharge = Math.max(0, calculateBaseCharge(aReading) - taxThreshhold(aReading.year));
