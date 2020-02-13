@@ -10,6 +10,7 @@ function calculateBaseCharge(aReading) {
 
 function enrichReading(original) {
   const result = Object.create(original);
+  result.baseCharge = calculateBaseCharge(result);
   return result;
 }
 
@@ -17,7 +18,7 @@ const rawReading = aquireReading();
 const aReading = enrichReading(rawReading);
 
 // 基本料金
-const baseCharge = calculateBaseCharge(aReading);
+const baseCharge = aReading.baseCharge;
 
 // 課税対象額
-const taxableCharge = Math.max(0, calculateBaseCharge(aReading) - taxThreshhold(aReading.year));
+const taxableCharge = Math.max(0, aReading.baseCharge - taxThreshhold(aReading.year));
