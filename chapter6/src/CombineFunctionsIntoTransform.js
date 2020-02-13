@@ -11,6 +11,7 @@ function calculateBaseCharge(aReading) {
 function enrichReading(original) {
   const result = Object.create(original);
   result.baseCharge = calculateBaseCharge(result);
+  result.taxableCharge = Math.max(0, aReading.baseCharge - taxThreshhold(aReading.year));
   return result;
 }
 
@@ -21,4 +22,4 @@ const aReading = enrichReading(rawReading);
 const baseCharge = aReading.baseCharge;
 
 // 課税対象額
-const taxableCharge = Math.max(0, aReading.baseCharge - taxThreshhold(aReading.year));
+const taxableCharge = aReading.taxableCharge;
