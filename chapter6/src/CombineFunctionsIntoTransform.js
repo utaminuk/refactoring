@@ -8,8 +8,14 @@ function calculateBaseCharge(aReading) {
   return baseRate(aReading.month, aReading.year) * aReading.quantity;
 }
 
+function enrichReading(original) {
+  const result = Object.create(original);
+  return result;
+}
 
-const aReading = aquireReading();
+const rawReading = aquireReading();
+const aReading = enrichReading(rawReading);
+
 // 基本料金
 const baseCharge = calculateBaseCharge(aReading);
 
