@@ -6,6 +6,9 @@ function baseRate(month, year) {
 
 
 const aReading = aquireReading();
+// 基本料金
 const baseCharge = baseRate(aReading.month, aReading.year) * aReading.quantity;
 
+// 課税対象額
 const base = (baseRate(aReading.month, aReading.year) * aReading.quantity);
+const taxableCharge = Math.max(0, base - taxThreshhold(aReading.year))
