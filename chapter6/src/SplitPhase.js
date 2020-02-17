@@ -1,7 +1,7 @@
-function priceOrder(product, quantity, shippingMethod) {
+export function priceOrder(product, quantity, shippingMethod) {
   const basePrice = product.basePrice * quantity;
   const discount =
-    Math.max(qutantity - product.discountThreshold, 0) *
+    Math.max(quantity - product.discountThreshold, 0) *
     product.basePrice *
     product.discountRate;
 
@@ -10,7 +10,7 @@ function priceOrder(product, quantity, shippingMethod) {
       ? shippingMethod.discountedFee
       : shippingMethod.feePerCase;
 
-  const shippingCost = qutantity * shippingPerCase;
+  const shippingCost = quantity * shippingPerCase;
   const price = basePrice - discount + shippingCost;
   return price;
 }
