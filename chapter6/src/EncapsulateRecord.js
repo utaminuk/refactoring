@@ -19,7 +19,7 @@ export function getOrganization() {
 }
 
 // 実際の利用例
-console.log(getRawDataOfOrganization());
+console.log(getOrganization().name);
 
 // 元コードの保存
 // const organization = { name: "Acme Gooseberries", country: "GB" }
