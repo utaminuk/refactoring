@@ -1,8 +1,14 @@
 // レコードのカプセル化(p168)
-const organization = { name: "Acme Gooseberries", country: "GB" }
 
+class Organization {
+  constructor(data) {
+    this._data = data;
+  }
+}
 
-function getRawDataOfOrganization() { return organization; }
+const organization = new Organization({ name: "Acme Gooseberries", country: "GB" });
+
+function getRawDataOfOrganization() { return organization._data; }
 
 // 実際の利用例
 console.log(getRawDataOfOrganization());
