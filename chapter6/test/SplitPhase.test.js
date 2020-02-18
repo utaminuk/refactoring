@@ -1,8 +1,8 @@
 import { priceOrder } from "../src/SplitPhase";
 
 describe("SplitPhase: priceOrder", () => {
-  beforeEach(() => {});
-  afterEach(() => {});
+  beforeEach(() => { });
+  afterEach(() => { });
   test("料金計算プログラム", () => {
     const product = {
       basePrice: 100,
@@ -18,3 +18,4 @@ describe("SplitPhase: priceOrder", () => {
     expect(priceOrder(product, quantity, shippingMethod)).toBe(1000);
   });
 });
+
