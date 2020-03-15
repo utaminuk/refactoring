@@ -15,10 +15,10 @@
     "url": "git@github.com:utaminuk/refactoring.git"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.3",
-    "@babel/core": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
-    "@types/jest": "^24.9.0",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@types/jest": "^25.1.4",
     "jest": "^25.1.0"
   },
   "jest": {
